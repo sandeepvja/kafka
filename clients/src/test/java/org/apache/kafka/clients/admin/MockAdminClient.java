@@ -334,12 +334,6 @@ public class MockAdminClient extends AdminClient {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
-    @Deprecated
-    @Override
-    public ElectPreferredLeadersResult electPreferredLeaders(Collection<TopicPartition> partitions, ElectPreferredLeadersOptions options) {
-        throw new UnsupportedOperationException("Not implemented yet");
-    }
-
     @Override
     public ElectLeadersResult electLeaders(
             ElectionType electionType,

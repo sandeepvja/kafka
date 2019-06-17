@@ -205,7 +205,7 @@ object PreferredReplicaLeaderElectionCommand extends Logging {
     }
   }
 
-  /** Election via AdminClient.electPreferredLeaders() */
+  /** Election via AdminClient.electLeaders(ElectionType.PREFERRED, partitions) */
   class AdminClientCommand(adminClientProps: Properties)
     extends Command with Logging {
 

@@ -841,46 +841,6 @@ public abstract class AdminClient implements AutoCloseable {
     }
 
     /**
-     * Elect the preferred replica as leader for topic partitions.
-     *
-     * This is a convenience method for {@link #electLeaders(ElectionType, Set, ElectLeadersOptions)}
-     * with preferred election type and default options.
-     *
-     * This operation is supported by brokers with version 2.2.0 or higher.
-     *
-     * @param partitions      The partitions for which the preferred leader should be elected.
-     * @return                The ElectPreferredLeadersResult.
-     * @deprecated            Since 2.4.0. Use {@link #electLeaders(ElectionType, Set)}.
-     */
-    @Deprecated
-    public ElectPreferredLeadersResult electPreferredLeaders(Collection<TopicPartition> partitions) {
-        return electPreferredLeaders(partitions, new ElectPreferredLeadersOptions());
-    }
-
-    /**
-     * Elect the preferred replica as leader for topic partitions.
-     *
-     * This is a convenience method for {@link #electLeaders(ElectionType, Set, ElectLeadersOptions)}
-     * with preferred election type.
-     *
-     * This operation is supported by brokers with version 2.2.0 or higher.
-     *
-     * @param partitions      The partitions for which the preferred leader should be elected.
-     * @param options         The options to use when electing the preferred leaders.
-     * @return                The ElectPreferredLeadersResult.
-     * @deprecated            Since 2.4.0. Use {@link #electLeaders(ElectionType, Set, ElectLeadersOptions)}.
-     */
-    @Deprecated
-    public ElectPreferredLeadersResult electPreferredLeaders(Collection<TopicPartition> partitions,
-                                                             ElectPreferredLeadersOptions options) {
-        final ElectLeadersOptions newOptions = new ElectLeadersOptions();
-        newOptions.timeoutMs(options.timeoutMs());
-        final Set<TopicPartition> topicPartitions = partitions == null ? null : new HashSet<>(partitions);
-
-        return new ElectPreferredLeadersResult(electLeaders(ElectionType.PREFERRED, topicPartitions, newOptions));
-    }
-
-    /**
      * Elect a replica as leader for topic partitions.
      *
      * This is a convenience method for {@link #electLeaders(ElectionType, Set, ElectLeadersOptions)}
