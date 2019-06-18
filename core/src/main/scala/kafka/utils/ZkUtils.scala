@@ -731,15 +731,6 @@ class ZkUtils(val zkClient: ZkClient,
     }
   }
 
-  def getPartitionsUndergoingPreferredReplicaElection(): Set[TopicAndPartition] = {
-    // read the partitions and their new replica list
-    val jsonPartitionListOpt = readDataMaybeNull(PreferredReplicaLeaderElectionPath)._1
-    jsonPartitionListOpt match {
-      case Some(jsonPartitionList) => PreferredReplicaLeaderElectionCommand.parsePreferredReplicaElectionData(jsonPartitionList).map(tp => new TopicAndPartition(tp))
-      case None => Set.empty[TopicAndPartition]
-    }
-  }
-
   def deletePartition(brokerId: Int, topic: String) {
     val brokerIdPath = BrokerIdsPath + "/" + brokerId
     zkClient.delete(brokerIdPath)
